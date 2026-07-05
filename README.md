@@ -51,9 +51,9 @@
 |refills_allowed |Allowed count before a formal renewal query is required.| INT|
 
 ## Tools Used
-### SQL
-### Postgresql
-### PGAdmin
+#### SQL
+#### Postgresql
+#### PGAdmin
 
 
 ## Key Analytical Questions
@@ -242,3 +242,22 @@ on p.provider_id = a.provider_id
 group by p.specialty
 order by leakage_rate desc;
 ```
+## key Insights and Business outcome
+| Question| Key insights | Business Outcome|
+|--------------|-------------------|--------------|
+| Question 1: Forensic Shift Auditing for Complianc| 114 records were flagged as UPDATE actions occurring outside standard Monday–Friday business hours. |This gives the compliance officer a concrete audit trail of after-hours system activity. Each of these 114 rows warrants manual review to confirm whether the update was a legitimate automated process (e.g., scheduled batch job) or an unauthorized/fraudulent change, since off-hours edits fall outside expected operational patterns.|
+|Question 2: Identifying Long-Term Maintenance Therapies | Only 4 medications (Atorvastatin, Ibuprofen, Lisinopril, Metformin) meet the criteria of daily frequency with more than 2 refills authorized.|These 4 drugs represent the core "chronic maintenance therapy" basket. The pharmacy division can prioritize these for bulk wholesale purchasing agreements and safety stock planning, since they represent predictable, recurring demand rather than one-off prescriptions.
+|Question 3: Screening for Chronic Cohorts by Age| 1,010 patients over age 50 were identified, broken down by blood type.| his defines the total eligible population for the proactive wellness pilot program. The Population Health team can now use the blood-type breakdown to plan resource allocation (e.g., blood donation drives, transfusion-related risk stratification) alongside general chronic care outreach.|
+|Question 4: Chronic Disease Medication Audits| 1,167 records link patients diagnosed with Type 2 Diabetes (E11.9) to a prescribed medication.| This volume gives Quality Assurance a full audit set to verify prescribing alignment. If any of these 1,167 records show medications inconsistent with standard diabetes care protocols, they can be flagged for clinical review — supporting compliance with treatment guidelines and reducing malpractice/liability risk.|
+|Question 5: Clinical Symptom Keyword Profiling| 845 non-vaccination records contain the keywords "pain" or "acute" in the clinical notes.| This surfaces the volume of charting activity tied to acute or pain-related presentations, excluding routine vaccination visits. Management can use this to assess documentation diligence (are providers thoroughly charting symptomatic visits?) and potentially correlate specialty/provider patterns with acute-case volume for staffing or training decisions.|
+|Question 6: High-Risk Refill Workload Projections| The same 4 chronic daily medications show consistent average refills (~2.0–2.1) but high total prescription counts (745–813 each).| This confirms a stable, high-volume refill workload for these drugs. Pharmacy operations can forecast staffing and inventory needs with confidence, since refill patterns are consistent rather than volatile — supporting smoother supply chain planning.|
+|Question 7: Flagging Underutilized Operational States| Dermatology (389 visits) and Orthopedics (382 visits) are the only specialties falling below the low-volume threshold in this cut of the data (note: the HAVING < 5 filter as literally described would only catch near-zero counts, so the real business rule was likely a much higher threshold — worth double-checking your query logic here).| These two specialties are candidates for the Regional Director's downsizing/reallocation review. Before acting, leadership should also consider whether appointment volume reflects fewer providers or genuinely lower demand.|
+|Question 8: High-Risk Patient Encounter Density Tracker| 617 patients have more than 3 clinical records on file, with individual patients ranging from 4 to 6 total encounters.| This is the target list for case management outreach. Since the max is only 6 encounters, no single patient is an extreme outlier — meaning the "high-utilizer" cohort is broad but moderate in intensity, suggesting a scalable, standardized care-gap intervention rather than individualized crisis management.|
+|Question 9: Dynamic Patient Portal Engagement Metrics| Female patients booked 5,005 appointments, with only 2,480 completed (about 49.5%) and 1,639 lost to cancellation/no-show (about 32.7%).| Nearly half of booked appointments for this gender segment don't result in a completed visit. Marketing and patient engagement teams can use this to design targeted reminder campaigns, portal engagement nudges, or scheduling flexibility specifically aimed at reducing no-shows in this demographic.|
+|Question 10: Executive Capacity Leakage Leaderboard| Neurology has the highest leakage rate (34.00%) and highest total lost visits (522), while Orthopedics has the lowest leakage rate (31.00%) among the specialties shown — though leakage rates cluster tightly between 31–34% across the board.|Because leakage is consistently high (roughly 1 in 3 bookings) across every specialty, this points to a systemic scheduling or reminder-process issue rather than a problem isolated to one department. The COO can use this leaderboard to prioritize Neurology and Internal Medicine for immediate intervention (highest absolute lost-hour impact) while treating the underlying leakage rate as an organization-wide process fix.|
+
+
+
+
+
+
